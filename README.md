@@ -1,7 +1,7 @@
 # FightLink
 
 ### Concept
-An app that helps players find opponents for fighting games with small player bases. Users can post their availability and sign up to fight other players online.
+An app that helps players find opponents for fighting games with small player bases. Users can share their availability and match up with other players for online matches.
 
 ### App features
 - The user can create an account and log in to the app.
