@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>New listing</title>
+</head>
+
+<body>
+  <h1>New listing</h1>
+  <form action="/create_item" method="post">
+    <p>
+      Game: <br />
+      <input type="text" name="game_name" />
+    </p>
+    <p>
+      In-game username: <br />
+      <input type="text" name="game_username" />
+    </p>
+    <p>
+      Availability: <br />
+      <input type="time" id="availability_start" name="availability_start" required />
+      -
+      <input type="time" id="availability_end" name="availability_end" required />
+    </p>
+    <p>
+      Platform: <br />
+      <input type="radio" name="platform" value="PC" required /> PC
+      <input type="radio" name="platform" value="PS" required /> PS4/PS5
+      <input type="radio" name="platform" value="Xbox" required /> Xbox One
+      <input type="radio" name="platform" value="Switch" required /> Switch
+    </p>
+    <p>
+      Region: <br />
+      <input type="radio" name="region" value="NA" required /> North America<br />
+      <input type="radio" name="region" value="EU" required /> Europe<br />
+      <input type="radio" name="region" value="Asia" required /> Asia<br />
+      <input type="radio" name="region" value="SA" required /> South America<br />
+      <input type="radio" name="region" value="Africa" required /> Africa<br />
+      <input type="radio" name="region" value="Oceania" required /> Oceania<br />
+      <input type="radio" name="region" value="Middle East" required /> Middle East
+    </p>
+    <p>
+      Other info: <br />
+      <textarea rows="8" cols="60"></textarea>
+    </p>
+    <input type="submit" value="Create listing" />
+  </form>
+</body>
+
+</html>
