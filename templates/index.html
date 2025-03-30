@@ -19,7 +19,16 @@
     <a href="/register">Register</a>
     <a href="/logout">Log out</a>
   </p>
-     <a href="/new_item">New listing</a>
+  <p>
+    <a href="/new_item">New listing</a>
+  </p>
+
+  <h2>Listings</h2>
+  <ul>
+    {% for item in items %}
+    <li><a href="/item/{{ item.id }}">{{ item.game_name }}</a></li>
+    {% endfor %}
+  </ul>
 </body>
 
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ item.game_name }}</title>
+</head>
+
+<body>
+  <h1>{{ item.game_name }}</h1>
+  <p>
+    Time: {{ item.availability_time }}
+  </p>
+  <p>
+    Username on {{ item.platform }}: {{ item.game_username }}
+  </p>
+  <p>
+    Region: {{ item.region }}
+  </p>
+  <p>
+    Additional info: <br />
+    {{ item.other_info }}
+  </p>
+  <p>
+    <a href="/">Back</a>
+  </p>
+</body>
+
+</html>

@@ -11,7 +11,13 @@ app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    all_items = items.get_items()
+    return render_template("index.html", items=all_items)
+
+@app.route("/item/<int:item_id>")
+def show_item(item_id):
+    item = items.get_item(item_id)
+    return render_template("show_item.html", item=item)
 
 @app.route("/new_item")
 def new_item():
@@ -21,14 +27,13 @@ def new_item():
 def create_item():
     game_name = request.form["game_name"]
     game_username = request.form["game_username"]
-    availability_start = request.form["availability_start"]
-    availability_end = request.form["availability_end"]
+    availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
     platform = request.form["platform"]
     region = request.form["region"]
     other_info = request.form["other_info"]
     user_id = session["user_id"]
 
-    items.add_item(game_name, game_username, availability_start, availability_end, platform, region, other_info, user_id)
+    items.add_item(game_name, game_username, availability_time, platform, region, other_info, user_id)
     
     return redirect("/")
 
