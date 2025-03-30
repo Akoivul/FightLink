@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask
-from flask import redirect, render_template, request, session
+from flask import abort, redirect, render_template, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import config
 import db
@@ -52,11 +52,17 @@ def create_item():
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
     item = items.get_item(item_id)
+    if item["user_id"] != session["user_id"]:
+        abort(403)
     return render_template("edit_item.html", item=item)
 
 @app.route("/update_item", methods=["POST"])
 def update_item():
     item_id = request.form["item_id"]
+    item = items.get_item(item_id)
+    if item["user_id"] != session["user_id"]:
+        abort(403)
+
     game_name = request.form["game_name"]
     game_username = request.form["game_username"]
     availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
@@ -65,7 +71,6 @@ def update_item():
     platform = request.form["platform"]
     region = request.form["region"]
     other_info = request.form["other_info"]
-    user_id = session["user_id"]
 
     items.update_item(item_id, game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info)
     
@@ -73,8 +78,11 @@ def update_item():
 
 @app.route("/remove_item/<int:item_id>", methods=["GET", "POST"])
 def remove_item(item_id):
-    if request.method == "GET":   
-        item = items.get_item(item_id)
+    item = items.get_item(item_id)
+    if item["user_id"] != session["user_id"]:
+        abort(403)
+
+    if request.method == "GET":
         return render_template("remove_item.html", item=item)
     
     if request.method == "POST":
