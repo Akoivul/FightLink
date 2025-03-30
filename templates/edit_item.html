@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit listing</title>
+</head>
+
+<body>
+  <h1>Edit listing</h1>
+  <form action="/update_item" method="post">
+    <p>
+      Game: <br />
+      <input type="text" name="game_name" value="{{ item.game_name }}" required />
+    </p>
+    <p>
+      In-game username: <br />
+      <input type="text" name="game_username" value="{{ item.game_username }}" required />
+    </p>
+    <p>
+      Availability: <br />
+      <input type="time" id="availability_start" name="availability_start" value="{{ item.availability_start }}" required />
+      -
+      <input type="time" id="availability_end" name="availability_end" value="{{ item.availability_end }}" required/>
+    </p>
+    <p>
+      Platform: <br />
+      <input type="radio" name="platform" value="PC" {% if item.platform == "PC" %}checked{% endif %} required /> PC
+      <input type="radio" name="platform" value="PS4/PS5" {% if item.platform == "PS4/PS5" %}checked{% endif %} required /> PS4/PS5
+      <input type="radio" name="platform" value="Xbox" {% if item.platform == "Xbox" %}checked{% endif %} required /> Xbox
+      <input type="radio" name="platform" value="Switch" {% if item.platform == "Switch" %}checked{% endif %} required /> Switch
+    </p>
+    <p>
+      Region: <br />
+      <input type="radio" name="region" value="North America" {% if item.region == "North America" %}checked{% endif %} required /> North America<br />
+      <input type="radio" name="region" value="Europe" {% if item.region == "Europe" %}checked{% endif %} required /> Europe<br />
+      <input type="radio" name="region" value="Asia" {% if item.region == "Asia" %}checked{% endif %} required /> Asia<br />
+      <input type="radio" name="region" value="South America" {% if item.region == "South America" %}checked{% endif %} required /> South America<br />
+      <input type="radio" name="region" value="Africa" {% if item.region == "Africa" %}checked{% endif %} required /> Africa<br />
+      <input type="radio" name="region" value="Oceania" {% if item.region == "Oceania" %}checked{% endif %} required /> Oceania<br />
+      <input type="radio" name="region" value="Middle East" {% if item.region == "Middle East" %}checked{% endif %} required /> Middle East
+    </p>
+    <p>
+      Other info: <br />
+      <textarea rows="8" cols="60" name="other_info">{{ item.other_info }}</textarea>
+    </p>
+    <input type="hidden" name="item_id" value="{{ item.id }}"/>
+    <input type="submit" value="Update listing" />
+  </form>
+</body>
+
+</html>

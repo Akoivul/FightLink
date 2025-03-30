@@ -28,14 +28,38 @@ def create_item():
     game_name = request.form["game_name"]
     game_username = request.form["game_username"]
     availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
+    availability_start = request.form["availability_start"]
+    availability_end = request.form["availability_end"]
     platform = request.form["platform"]
     region = request.form["region"]
     other_info = request.form["other_info"]
     user_id = session["user_id"]
 
-    items.add_item(game_name, game_username, availability_time, platform, region, other_info, user_id)
+    items.add_item(game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info, user_id)
     
     return redirect("/")
+
+@app.route("/edit_item/<int:item_id>")
+def edit_item(item_id):
+    item = items.get_item(item_id)
+    return render_template("edit_item.html", item=item)
+
+@app.route("/update_item", methods=["POST"])
+def update_item():
+    item_id = request.form["item_id"]
+    game_name = request.form["game_name"]
+    game_username = request.form["game_username"]
+    availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
+    availability_start = request.form["availability_start"]
+    availability_end = request.form["availability_end"]
+    platform = request.form["platform"]
+    region = request.form["region"]
+    other_info = request.form["other_info"]
+    user_id = session["user_id"]
+
+    items.update_item(item_id, game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info)
+    
+    return redirect("/item/" + str(item_id))
 
 @app.route("/register")
 def register():

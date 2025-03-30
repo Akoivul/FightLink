@@ -9,6 +9,8 @@ CREATE TABLE items (
     game_name TEXT,
     game_username TEXT,
     availability_time TEXT,
+    availability_start TEXT,
+    availability_end TEXT,
     platform TEXT,
     region TEXT,
     other_info TEXT,
