@@ -37,3 +37,7 @@ def update_item(item_id, game_name, game_username, availability_time, availabili
                               other_info = ?
                           WHERE id = ?"""
     db.execute(sql, [game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info, item_id])
+
+def remove_item(item_id):
+    sql = "DELETE FROM items WHERE id = ?"
+    db.execute(sql, [item_id])
