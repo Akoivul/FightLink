@@ -10,11 +10,11 @@
   <form action="/update_item" method="post">
     <p>
       Game: <br />
-      <input type="text" name="game_name" value="{{ item.game_name }}" required />
+      <input type="text" name="game_name" value="{{ item.game_name }}" maxlength="100" required />
     </p>
     <p>
       In-game username: <br />
-      <input type="text" name="game_username" value="{{ item.game_username }}" required />
+      <input type="text" name="game_username" value="{{ item.game_username }}" maxlength="50" required />
     </p>
     <p>
       Availability: <br />
@@ -41,7 +41,7 @@
     </p>
     <p>
       Other info: <br />
-      <textarea rows="8" cols="60" name="other_info">{{ item.other_info }}</textarea>
+      <textarea rows="8" cols="60" name="other_info" maxlength="1000">{{ item.other_info }}</textarea>
     </p>
     <input type="hidden" name="item_id" value="{{ item.id }}"/>
     <input type="submit" value="Update listing" />

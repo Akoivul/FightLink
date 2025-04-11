@@ -10,11 +10,11 @@
   <form action="/create_item" method="post">
     <p>
       Game: <br />
-      <input type="text" name="game_name" required />
+      <input type="text" name="game_name" maxlength="50" required />
     </p>
     <p>
       In-game username: <br />
-      <input type="text" name="game_username" required />
+      <input type="text" name="game_username" maxlength="50" required />
     </p>
     <p>
       Availability: <br />
@@ -41,7 +41,7 @@
     </p>
     <p>
       Other info: <br />
-      <textarea rows="8" cols="60" name="other_info"></textarea>
+      <textarea rows="8" cols="60" name="other_info" maxlength="1000"></textarea>
     </p>
     <input type="submit" value="Create listing" />
   </form>

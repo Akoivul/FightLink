@@ -44,13 +44,19 @@ def new_item():
 def create_item():
     require_login()
     game_name = request.form["game_name"]
+    if not game_name or len(game_name) > 100:
+        abort(403)
     game_username = request.form["game_username"]
+    if not game_username or len(game_username) > 50:
+        abort(403)
     availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
     availability_start = request.form["availability_start"]
     availability_end = request.form["availability_end"]
     platform = request.form["platform"]
     region = request.form["region"]
     other_info = request.form["other_info"]
+    if len(other_info) > 1000:
+        abort(403)
     user_id = session["user_id"]
 
     items.add_item(game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info, user_id)
@@ -78,13 +84,19 @@ def update_item():
         abort(403)
 
     game_name = request.form["game_name"]
+    if not game_name or len(game_name) > 100:
+        abort(403)
     game_username = request.form["game_username"]
+    if not game_username or len(game_username) > 50:
+        abort(403)
     availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
     availability_start = request.form["availability_start"]
     availability_end = request.form["availability_end"]
     platform = request.form["platform"]
     region = request.form["region"]
     other_info = request.form["other_info"]
+    if len(other_info) > 1000:
+        abort(403)
 
     items.update_item(item_id, game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info)
     
