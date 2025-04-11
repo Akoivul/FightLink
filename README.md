@@ -17,3 +17,23 @@ An app that helps players find opponents for fighting games with small player ba
 - The user can add, edit and delete listings.
 - The user can view other listings added to the app.
 - The user can search for listings.
+
+## Installing the app
+
+Install the `flask`-library:
+
+```
+$ pip install flask
+```
+
+Create tables for the database:
+
+```
+$ sqlite3 database.db < schema.sql
+```
+
+To run the app:
+
+```
+$ flask run
+```
