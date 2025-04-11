@@ -12,15 +12,20 @@
   <p>
     Signed in as {{ session.username }}
   </p>
-  {% endif %}
-
   <p>
-    <a href="/login">Log in</a>
-    <a href="/register">Register</a>
     <a href="/logout">Log out</a>
   </p>
   <p>
     <a href="/new_item">New listing</a>
+  </p>
+  {% else %}
+  <p>
+    <a href="/login">Log in</a>
+    <a href="/register">Register</a>
+  </p>
+  {% endif %}
+
+  <p>
     <a href="/find_item">Search for listing</a>
   </p>
 
