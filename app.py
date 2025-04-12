@@ -41,12 +41,14 @@ def show_item(item_id):
     item = items.get_item(item_id)
     if not item:
         abort(404)
-    return render_template("show_item.html", item=item)
+    classes = items.get_classes(item_id)
+    return render_template("show_item.html", item=item, classes=classes)
 
 @app.route("/new_item")
 def new_item():
     require_login()
-    return render_template("new_item.html")
+    classes = items.get_all_classes()
+    return render_template("new_item.html", classes=classes)
 
 @app.route("/create_item", methods=["POST"])
 def create_item():
@@ -60,14 +62,22 @@ def create_item():
     availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
     availability_start = request.form["availability_start"]
     availability_end = request.form["availability_end"]
-    platform = request.form["platform"]
-    region = request.form["region"]
     other_info = request.form["other_info"]
     if len(other_info) > 1000:
         abort(403)
     user_id = session["user_id"]
 
-    items.add_item(game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info, user_id)
+    all_classes = items.get_all_classes()
+
+    classes = []
+    for class_name, options in all_classes.items():
+        selected_option = request.form.get(class_name)
+        if selected_option:
+            if selected_option not in options:
+                abort(403)
+            classes.append((class_name, selected_option))
+    
+    items.add_item(game_name, game_username, availability_time, availability_start, availability_end, other_info, user_id, classes)
 
     return redirect("/")
 
@@ -79,11 +89,25 @@ def edit_item(item_id):
         abort(404)
     if item["user_id"] != session["user_id"]:
         abort(403)
-    return render_template("edit_item.html", item=item)
+    
+    item = dict(item)
+    
+    all_classes = items.get_all_classes()
+
+    classes = {}
+    for class_name, options in all_classes.items():
+        classes[class_name] = options
+
+    item_classes = items.get_classes(item_id)
+    for entry in item_classes:
+        item[entry["title"]] = entry["value"]
+    
+    return render_template("edit_item.html", item=item, classes=classes, all_classes=all_classes)
 
 @app.route("/update_item", methods=["POST"])
 def update_item():
     require_login()
+
     item_id = request.form["item_id"]
     item = items.get_item(item_id)
     if not item:
@@ -100,13 +124,21 @@ def update_item():
     availability_time = f"{request.form['availability_start']}-{request.form['availability_end']}"
     availability_start = request.form["availability_start"]
     availability_end = request.form["availability_end"]
-    platform = request.form["platform"]
-    region = request.form["region"]
     other_info = request.form["other_info"]
     if len(other_info) > 1000:
         abort(403)
 
-    items.update_item(item_id, game_name, game_username, availability_time, availability_start, availability_end, platform, region, other_info)
+    all_classes = items.get_all_classes()
+
+    classes = []
+    for class_name, options in all_classes.items():
+        selected_option = request.form.get(class_name)
+        if selected_option:
+            if selected_option not in options:
+                abort(403)
+            classes.append((class_name, selected_option))
+
+    items.update_item(item_id, game_name, game_username, availability_time, availability_start, availability_end, other_info, classes)
 
     return redirect("/item/" + str(item_id))
 

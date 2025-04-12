@@ -18,17 +18,17 @@
     Time: {{ item.availability_time }}
   </p>
   <p>
-    Username on {{ item.platform }}: {{ item.game_username }}
+    Username: {{ item.game_username }}
   </p>
+  {% if classes %}
   <p>
-    Region: {{ item.region }}
-  </p>
+    {% for class in classes %}
+    <li>{{ class.title }}: {{ class.value }}</li>
+    {% endfor %}
+  {% endif %}
   <p>
     Additional info: <br />
     {{ item.other_info }}
-  </p>
-  <p>
-    FightLink username: {{ item.username }}
   </p>
   <p>
     <a href="/">Back</a>

@@ -11,8 +11,19 @@ CREATE TABLE items (
     availability_time TEXT,
     availability_start TEXT,
     availability_end TEXT,
-    platform TEXT,
-    region TEXT,
     other_info TEXT,
     user_id INTEGER REFERENCES users
+);
+
+CREATE TABLE classes (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    value TEXT
+);
+
+CREATE TABLE item_classes (
+    id INTEGER PRIMARY KEY,
+    item_id INTEGER REFERENCES items,
+    title TEXT,
+    value TEXT
 );
