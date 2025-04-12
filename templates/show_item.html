@@ -7,7 +7,7 @@
 
 <body>
   <h1>{{ item.game_name }}</h1>
-  <h3>FightLink id: {{ item.username }}</h3>
+  <h3>FightLink id: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></h3>
   {% if session.user_id == item.user_id %}
   <p>
     <a href="/edit_item/{{ item.id }}">Edit</a>
