@@ -23,6 +23,18 @@ def add_item(game_name, game_username, availability_time, availability_start, av
     for class_title, class_value in classes:
         db.execute(sql, [item_id, class_title, class_value])
 
+def add_signup(item_id, user_id, signup):
+    sql = """INSERT INTO signups (item_id, user_id, game_username)
+             VALUES (?, ?, ?)"""
+    db.execute(sql, [item_id, user_id, signup])
+
+def get_signups(item_id):
+    sql = """SELECT signups.game_username, users.id user_id, users.username
+             FROM signups, users
+             WHERE signups.item_id = ? AND signups.user_id = users.id
+             ORDER BY signups.id DESC"""
+    return db.query(sql, [item_id])
+
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
     return db.query(sql, [item_id])

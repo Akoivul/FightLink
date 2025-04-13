@@ -30,6 +30,19 @@
     Additional info: <br />
     {{ item.other_info }}
   </p>
+  <h2>Players signed up</h2>
+  <ul>
+    {% for signup in signups %}
+    <li>{{ signup.game_username }}, <a href="/user/{{ signup.user_id }}">{{ signup.username }}</a></li>
+    {% endfor %}
+  </ul>
+  <h2>Sign up</h2>
+  <form action="/sign_up" method="post">
+    Username:
+    <input type="text" name="game_username" size="15" required />
+    <input type="hidden" name="item_id" value="{{ item.id }}" />
+    <input type="submit" value="Sign up to play" />
+  </form>
   <p>
     <a href="/">Back</a>
   </p>

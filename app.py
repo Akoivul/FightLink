@@ -2,7 +2,6 @@ import sqlite3
 from flask import Flask
 from flask import abort, redirect, render_template, request, session
 import config
-import db
 import items
 import users
 
@@ -42,7 +41,8 @@ def show_item(item_id):
     if not item:
         abort(404)
     classes = items.get_classes(item_id)
-    return render_template("show_item.html", item=item, classes=classes)
+    signups = items.get_signups(item_id)
+    return render_template("show_item.html", item=item, classes=classes, signups=signups)
 
 @app.route("/new_item")
 def new_item():
@@ -80,6 +80,23 @@ def create_item():
     items.add_item(game_name, game_username, availability_time, availability_start, availability_end, other_info, user_id, classes)
 
     return redirect("/")
+
+@app.route("/sign_up", methods=["POST"])
+def sign_up():
+    require_login()
+
+    signup = request.form["game_username"]
+    if not signup or len(signup) > 50:
+        abort(403)
+    item_id = request.form["item_id"]
+    item = items.get_item(item_id)
+    if not item:
+        abort(403)
+    user_id = session["user_id"]
+    
+    items.add_signup(item_id, user_id, signup)
+
+    return redirect("/item/" + str(item_id))
 
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
