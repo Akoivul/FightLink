@@ -82,7 +82,7 @@ def create_item():
     return redirect("/")
 
 @app.route("/sign_up", methods=["POST"])
-def sign_up():
+def create_signup():
     require_login()
 
     signup = request.form["game_username"]
@@ -93,6 +93,10 @@ def sign_up():
     if not item:
         abort(403)
     user_id = session["user_id"]
+    
+    current_signups = items.get_signups(item_id)
+    if any(signup["user_id"] == user_id for signup in current_signups):
+        items.remove_signup(item_id, user_id)
     
     items.add_signup(item_id, user_id, signup)
 

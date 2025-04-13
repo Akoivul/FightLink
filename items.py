@@ -35,6 +35,10 @@ def get_signups(item_id):
              ORDER BY signups.id DESC"""
     return db.query(sql, [item_id])
 
+def remove_signup(item_id, user_id):
+    sql = "DELETE FROM signups WHERE item_id = ? AND user_id = ?"
+    db.execute(sql, [item_id, user_id])
+
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
     return db.query(sql, [item_id])
