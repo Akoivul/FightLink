@@ -81,6 +81,8 @@ def update_item(item_id, game_name, game_username, availability_time, availabili
         db.execute(sql, [item_id, class_title, class_value])
 
 def remove_item(item_id):
+    sql = "DELETE FROM signups WHERE item_id = ?"
+    db.execute(sql, [item_id])
     sql = "DELETE FROM item_classes WHERE item_id = ?"
     db.execute(sql, [item_id])
     sql = "DELETE FROM items WHERE id = ?"
