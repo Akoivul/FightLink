@@ -36,6 +36,7 @@
     <li>{{ signup.game_username }}, <a href="/user/{{ signup.user_id }}">{{ signup.username }}</a></li>
     {% endfor %}
   </ul>
+  {% if session.user_id != item.user_id %}
   <h2>Sign up</h2>
   <form action="/sign_up" method="post">
     Username:
@@ -43,6 +44,7 @@
     <input type="hidden" name="item_id" value="{{ item.id }}" />
     <input type="submit" value="Sign up to play" />
   </form>
+  {% endif %}
   <p>
     <a href="/">Back</a>
   </p>
