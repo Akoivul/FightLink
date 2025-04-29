@@ -44,7 +44,7 @@ def get_classes(item_id):
     return db.query(sql, [item_id])
 
 def get_items():
-    sql = "SELECT id, game_name FROM items ORDER BY id DESC"
+    sql = "SELECT id, game_name, availability_time FROM items ORDER BY id DESC"
     return db.query(sql)
 
 def get_item(item_id):
