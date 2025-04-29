@@ -11,9 +11,9 @@
   <h1>FightLink</h1>
   </div>
 
-  {% if session.username %}
+  {% if session.user_id %}
   <p>
-    Signed in as {{ session.username }}
+    Signed in as <a href="/user/{{ session.user_id }}" style="color: #467be3;">{{ session.username }}</a>
   </p>
   {% endif %}
   <p>
