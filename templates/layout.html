@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  <h1>FightLink</h1>
+
+  {% if session.username %}
+  <p>
+    Signed in as {{ session.username }}
+  </p>
+  {% endif %}
+
+  <p>
+    <a href="/">Home</a> |
+    <a href="/find_item">Search for listing</a> |
+    {% if session.username %}
+      <a href="/new_item">New listing</a> |
+      <a href="/logout">Log out</a>
+    {% else %}
+      <a href="/login">Log in</a> |
+      <a href="/register">Register</a>
+    {% endif %}
+  </p>
+
+  {% block content %}{% endblock %}
+</body>
+
+</html>

@@ -1,53 +1,45 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>{{ item.game_name }}</title>
-</head>
+{% block title %}{{ item.game_name }}{% endblock %}
 
-<body>
-  <h1>{{ item.game_name }}</h1>
-  <h3>FightLink id: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></h3>
-  {% if session.user_id == item.user_id %}
-  <p>
-    <a href="/edit_item/{{ item.id }}">Edit</a>
-    <a href="/remove_item/{{ item.id }}">Remove</a>
-  </p>
-  {% endif %}
-  <p>
-    Time: {{ item.availability_time }}
-  </p>
-  <p>
-    Username: {{ item.game_username }}
-  </p>
-  {% if classes %}
-  <p>
-    {% for class in classes %}
-    <li>{{ class.title }}: {{ class.value }}</li>
-    {% endfor %}
-  {% endif %}
-  <p>
-    Additional info: <br />
-    {{ item.other_info }}
-  </p>
-  <h2>Players signed up</h2>
-  <ul>
-    {% for signup in signups %}
-    <li>{{ signup.game_username }}, <a href="/user/{{ signup.user_id }}">{{ signup.username }}</a></li>
-    {% endfor %}
-  </ul>
-  {% if session.user_id != item.user_id %}
-  <h2>Sign up</h2>
-  <form action="/sign_up" method="post">
-    Username:
-    <input type="text" name="game_username" size="15" required />
-    <input type="hidden" name="item_id" value="{{ item.id }}" />
-    <input type="submit" value="Sign up to play" />
-  </form>
-  {% endif %}
-  <p>
-    <a href="/">Back</a>
-  </p>
-</body>
-
-</html>
+{% block content %}
+<h2>{{ item.game_name }}</h2>
+<h3>FightLink id: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></h3>
+{% if session.user_id == item.user_id %}
+<p>
+  <a href="/edit_item/{{ item.id }}">Edit</a>
+  <a href="/remove_item/{{ item.id }}">Remove</a>
+</p>
+{% endif %}
+<p>
+  Time: {{ item.availability_time }}
+</p>
+<p>
+  Username: {{ item.game_username }}
+</p>
+{% if classes %}
+<p>
+  {% for class in classes %}
+  <li>{{ class.title }}: {{ class.value }}</li>
+  {% endfor %}
+{% endif %}
+<p>
+  Additional info: <br />
+  {{ item.other_info }}
+</p>
+<h3>Players signed up</h3>
+<ul>
+  {% for signup in signups %}
+  <li>{{ signup.game_username }}, <a href="/user/{{ signup.user_id }}">{{ signup.username }}</a></li>
+  {% endfor %}
+</ul>
+{% if session.user_id != item.user_id %}
+<h3>Sign up</h3>
+<form action="/sign_up" method="post">
+  Username:
+  <input type="text" name="game_username" size="15" required />
+  <input type="hidden" name="item_id" value="{{ item.id }}" />
+  <input type="submit" value="Sign up to play" />
+</form>
+{% endif %}
+{% endblock %}

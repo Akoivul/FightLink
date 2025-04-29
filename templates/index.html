@@ -1,37 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>FightLink</title>
-</head>
+{% block title %}FightLink{% endblock %}
 
-<body>
-  <h1>FightLink</h1>
+{% block content %}
+<h2>Listings</h2>
 
-  {% if session.username %}
-  <p>
-    Signed in as {{ session.username }}
-  </p>
-  {% endif %}
-
-  <p>
-    <a href="/find_item">Search for listing</a> |
-    {% if session.username %}
-      <a href="/new_item">New listing</a> |
-      <a href="/logout">Log out</a>
-    {% else %}
-      <a href="/login">Log in</a> |
-      <a href="/register">Register</a>
-    {% endif %}
-  </p>
-
-  <h2>Listings</h2>
-
-  <ul>
-    {% for item in items %}
-    <li><a href="/item/{{ item.id }}">{{ item.game_name }}</a><br>{{ item.availability_time }}</li>
-    {% endfor %}
-  </ul>
-</body>
-
-</html>
+<ul>
+  {% for item in items %}
+  <li><a href="/item/{{ item.id }}">{{ item.game_name }}</a> | {{ item.availability_time }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

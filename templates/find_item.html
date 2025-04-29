@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Search for listing</title>
-</head>
+{% block title %}Search for listing{% endblock %}
 
-<body>
-  <h1>Search for listing</h1>
+{% block content %}
+<h2>Search for listing</h2>
 
-  <form action="/find_item" method="get">
-    <p>
-      Search: <input type="text" name="query" value="{{ query }}">
-    </p>
-    <input type="submit" value="Submit">
-  </form>
-
+<form action="/find_item" method="get">
   <p>
-    <a href="/">Back</a>
+    Search: <input type="text" name="query" value="{{ query }}">
   </p>
+  <input type="submit" value="Submit">
+</form>
 
-  {% if query %}
-  <h2>Results</h2>
+<p>
+  <a href="/">Back</a>
+</p>
 
-  <ul>
-    {% for item in results %}
-    <li><a href="/item/{{ item.id }}">{{ item.game_name }}</a></li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</body>
+{% if query %}
+<h2>Results</h2>
 
-</html>
+<ul>
+  {% for item in results %}
+  <li><a href="/item/{{ item.id }}">{{ item.game_name }}</a> | {{ item.availability_time }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

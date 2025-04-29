@@ -1,41 +1,36 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>New listing</title>
-</head>
+{% block title %}New listing{% endblock %}
 
-<body>
-  <h1>New listing</h1>
-  <form action="/create_item" method="post">
-    <p>
-      Game: <br />
-      <input type="text" name="game_name" maxlength="50" required />
-    </p>
-    <p>
-      In-game username: <br />
-      <input type="text" name="game_username" maxlength="50" required />
-    </p>
-    <p>
-      Availability: <br />
-      <input type="time" id="availability_start" name="availability_start" required />
-      -
-      <input type="time" id="availability_end" name="availability_end" required/>
-    </p>
-    {% for class, options in classes.items() %}
-    <p>
-      <label>{{ class }}</label>: <br />
-      {% for option in options %}
-      <input type="radio" name="{{ class }}" value="{{ option }}" required /> {{ option }}<br />
-      {% endfor %}
-    </p>
+{% block content %}
+<h2>New listing</h2>
+<form action="/create_item" method="post">
+  <p>
+    Game: <br />
+    <input type="text" name="game_name" maxlength="50" required />
+  </p>
+  <p>
+    In-game username: <br />
+    <input type="text" name="game_username" maxlength="50" required />
+  </p>
+  <p>
+    Availability: <br />
+    <input type="time" id="availability_start" name="availability_start" required />
+    -
+    <input type="time" id="availability_end" name="availability_end" required/>
+  </p>
+  {% for class, options in classes.items() %}
+  <p>
+    <label>{{ class }}</label>: <br />
+    {% for option in options %}
+    <input type="radio" name="{{ class }}" value="{{ option }}" required /> {{ option }}<br />
     {% endfor %}
-    <p>
-      Other info: <br />
-      <textarea rows="8" cols="60" name="other_info" maxlength="1000"></textarea>
-    </p>
-    <input type="submit" value="Create listing" />
-  </form>
-</body>
-
-</html>
+  </p>
+  {% endfor %}
+  <p>
+    Other info: <br />
+    <textarea rows="8" cols="60" name="other_info" maxlength="1000"></textarea>
+  </p>
+  <input type="submit" value="Create listing" />
+</form>
+{% endblock %}
