@@ -7,26 +7,26 @@
 </head>
 
 <body>
+  <div class="header">
   <h1>FightLink</h1>
+  </div>
 
   {% if session.username %}
   <p>
     Signed in as {{ session.username }}
   </p>
   {% endif %}
-
   <p>
-    <a href="/">Home</a> |
-    <a href="/find_item">Search for listing</a> |
+    <a href="/" style="color: #467be3;">Home</a> |
+    <a href="/find_item" style="color: #467be3;">Search for listing</a> |
     {% if session.username %}
-      <a href="/new_item">New listing</a> |
-      <a href="/logout">Log out</a>
+      <a href="/new_item" style="color: #467be3;">New listing</a> |
+      <a href="/logout" style="color: #467be3;">Log out</a>
     {% else %}
-      <a href="/login">Log in</a> |
-      <a href="/register">Register</a>
+      <a href="/login" style="color: #467be3;">Log in</a> |
+      <a href="/register" style="color: #467be3;">Register</a>
     {% endif %}
   </p>
-
   {% block content %}{% endblock %}
 </body>
 

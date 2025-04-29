@@ -7,7 +7,7 @@ def get_user(user_id):
     return result[0] if result else None
 
 def get_items(user_id):
-    sql = "SELECT id, game_name FROM items WHERE user_id = ? ORDER BY id DESC"
+    sql = "SELECT id, game_name, availability_time FROM items WHERE user_id = ? ORDER BY id DESC"
     return db.query(sql, [user_id])
 
 def create_user(username, password):

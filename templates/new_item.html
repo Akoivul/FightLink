@@ -4,6 +4,7 @@
 
 {% block content %}
 <h2>New listing</h2>
+<div class="content">
 <form action="/create_item" method="post">
   <p>
     Game: <br />
@@ -33,4 +34,5 @@
   </p>
   <input type="submit" value="Create listing" />
 </form>
+</div>
 {% endblock %}

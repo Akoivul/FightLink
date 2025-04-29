@@ -4,10 +4,12 @@
 
 {% block content %}
 <h2>Remove listing</h2>
+<div class="content">
 <p>Listing: {{ item.game_name }} | {{ item.availability_time }}</p>
 <p>Are you sure you want to delete this listing?</p>
 <form action="/remove_item/{{ item.id }}" method="post">
   <input type="submit" name="remove" value="Remove listing">
   <input type="submit" name="back" value="Go back">
 </form>
+</div>
 {% endblock %}

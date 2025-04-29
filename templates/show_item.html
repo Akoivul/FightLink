@@ -4,30 +4,34 @@
 
 {% block content %}
 <h2>{{ item.game_name }}</h2>
-<p>FightLink id: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></p>
+<p>FightLink id: <a href="/user/{{ item.user_id }}" style="color: #467be3;">{{ item.username }}</a></p>
+<div class="content">
 {% if session.user_id == item.user_id %}
 <p>
-  <a href="/edit_item/{{ item.id }}">Edit</a>
-  <a href="/remove_item/{{ item.id }}">Remove</a>
+  <a href="/edit_item/{{ item.id }}" style="color: #467be3;">Edit</a>
+  <a href="/remove_item/{{ item.id }}" style="color: #467be3;">Remove</a>
 </p>
 {% endif %}
+<div class="item">
 <p>
   Time: {{ item.availability_time }}
 </p>
-<li>
-  Username: {{ item.game_username }}
-</li>
+Username: {{ item.game_username }}<br />
 {% if classes %}
   {% for class in classes %}
-  <li>{{ class.title }}: {{ class.value }}</li>
+  {{ class.title }}: {{ class.value }}<br />
   {% endfor %}
 {% endif %}
-  <br>{{ item.other_info }}</br>
+<div style="white-space: pre-line;">
+  <br>{{ item.other_info }}
+</div>
 </p>
+</div>
+</div>
 <h3>Players signed up</h3>
 <ul>
   {% for signup in signups %}
-  <li>{{ signup.game_username }}, <a href="/user/{{ signup.user_id }}">{{ signup.username }}</a></li>
+  <li>{{ signup.game_username }}, <a href="/user/{{ signup.user_id }}" style="color: #467be3;">{{ signup.username }}</a></li>
   {% endfor %}
 </ul>
 {% if session.user_id != item.user_id %}

@@ -2,12 +2,29 @@ body {
     margin: auto;
     max-width: 50em;
     font-family: Verdana, sans-serif;
-    background-color: lightblue;
+    color: #ffffff;
+    background-color: #0d1117;
   }
 
-.item {
-    border: 2px solid black;
-    margin: 1em;
+.header {
+    color: #e4efff;
+}
+
+  .item {
+    border: 2px #161b24;
+    background-color: #161b24;
+    margin: 0.5em;
     border-radius: 8px;
     padding: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.content {
+    border: 2px;
+    border-radius: 8px;
+    padding: 5px;
+    padding: 1em;
+    margin: 0.5em 0;
+    background-color: #10141b;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }

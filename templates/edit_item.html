@@ -4,6 +4,7 @@
 
 {% block content %}
 <h2>Edit listing</h2>
+<div class="content">
 <form action="/update_item" method="post">
   <p>
     Game: <br />
@@ -34,4 +35,5 @@
   <input type="hidden" name="item_id" value="{{ item.id }}"/>
   <input type="submit" value="Update listing" />
 </form>
+</div>
 {% endblock %}
