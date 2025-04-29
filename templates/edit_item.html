@@ -3,7 +3,8 @@
 {% block title %}Edit listing{% endblock %}
 
 {% block content %}
-<h2>Edit listing</h2>
+<h2>{{ item.game_name }}</h2>
+<h3>Edit listing</h3>
 <div class="content">
 <form action="/update_item" method="post">
   <p>
@@ -36,4 +37,7 @@
   <input type="submit" value="Update listing" />
 </form>
 </div>
+<p>
+  <a href="/item/{{ item.id }}" style="color: #467be3;">Back to listing</a>
+</p>
 {% endblock %}
