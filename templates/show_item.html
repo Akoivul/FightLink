@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ item.game_name }}</h2>
-<h3>FightLink id: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></h3>
+<p>FightLink id: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></p>
 {% if session.user_id == item.user_id %}
 <p>
   <a href="/edit_item/{{ item.id }}">Edit</a>
@@ -14,18 +14,15 @@
 <p>
   Time: {{ item.availability_time }}
 </p>
-<p>
+<li>
   Username: {{ item.game_username }}
-</p>
+</li>
 {% if classes %}
-<p>
   {% for class in classes %}
   <li>{{ class.title }}: {{ class.value }}</li>
   {% endfor %}
 {% endif %}
-<p>
-  Additional info: <br />
-  {{ item.other_info }}
+  <br>{{ item.other_info }}</br>
 </p>
 <h3>Players signed up</h3>
 <ul>

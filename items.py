@@ -44,7 +44,10 @@ def get_classes(item_id):
     return db.query(sql, [item_id])
 
 def get_items():
-    sql = "SELECT id, game_name, availability_time FROM items ORDER BY id DESC"
+    sql = """SELECT items.id, items.game_name, items.availability_time, users.id user_id, users.username
+             FROM items, users
+             WHERE items.user_id = users.id
+             ORDER BY items.id DESC"""
     return db.query(sql)
 
 def get_item(item_id):
@@ -89,10 +92,10 @@ def remove_item(item_id):
     db.execute(sql, [item_id])
 
 def find_items(query):
-    sql = """SELECT DISTINCT items.id, items.game_name, availability_time
-             FROM items
+    sql = """SELECT DISTINCT items.id, items.game_name, items.availability_time, users.id user_id, users.username
+             FROM users, items
              LEFT JOIN item_classes ON items.id = item_classes.item_id
-             WHERE items.game_name LIKE ? OR items.other_info LIKE ? OR item_classes.value LIKE ?
+             WHERE items.user_id = users.id AND items.game_name LIKE ? OR items.other_info LIKE ? OR item_classes.value LIKE ?
              ORDER BY items.id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like, like])
