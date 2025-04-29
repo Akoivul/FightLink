@@ -93,9 +93,10 @@ def remove_item(item_id):
 
 def find_items(query):
     sql = """SELECT DISTINCT items.id, items.game_name, items.availability_time, users.id user_id, users.username
-             FROM users, items
+             FROM items
+             JOIN users ON items.user_id = users.id
              LEFT JOIN item_classes ON items.id = item_classes.item_id
-             WHERE items.user_id = users.id AND items.game_name LIKE ? OR items.other_info LIKE ? OR item_classes.value LIKE ?
+             WHERE items.game_name LIKE ? OR items.other_info LIKE ? OR item_classes.value LIKE ?
              ORDER BY items.id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like, like])
