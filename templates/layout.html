@@ -27,6 +27,13 @@
       <a href="/register" style="color: #467be3;">Register</a>
     {% endif %}
   </p>
+
+  {% for message in get_flashed_messages() %}
+  <div class="info">
+    {{ message }}
+  </div>
+  {% endfor %}
+
   {% block content %}{% endblock %}
 </body>
 

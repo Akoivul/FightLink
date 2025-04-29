@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask
-from flask import abort, redirect, render_template, request, session
+from flask import abort, flash, redirect, render_template, request, session
 import config
 import items
 import users
@@ -192,14 +192,16 @@ def create():
     password1 = request.form["password1"]
     password2 = request.form["password2"]
     if password1 != password2:
-        return "ERROR: passwords do not match"
+        flash("ERROR: passwords do not match")
+        return redirect("/register")
 
     try:
         users.create_user(username, password1)
     except sqlite3.IntegrityError:
-        return "ERROR: username is already taken"
+        flash("ERROR: username is already taken")
+        return redirect("/register")
 
-    return render_template("user_created.html")
+    return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -216,7 +218,8 @@ def login():
             session["username"] = username
             return redirect("/")
         else:
-            return "ERROR: wrong username or password"
+            flash("ERROR: wrong username or password")
+            return redirect("/login")
 
 @app.route("/logout")
 def logout():
