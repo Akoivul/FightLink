@@ -34,6 +34,7 @@
     <textarea rows="8" cols="60" name="other_info" maxlength="1000">{{ item.other_info }}</textarea>
   </p>
   <input type="hidden" name="item_id" value="{{ item.id }}"/>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Update listing" />
 </form>
 </div>

@@ -32,6 +32,7 @@
     Other info: <br />
     <textarea rows="8" cols="60" name="other_info" maxlength="1000"></textarea>
   </p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Create listing" />
 </form>
 </div>
