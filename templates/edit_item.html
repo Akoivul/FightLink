@@ -8,30 +8,30 @@
 <div class="content">
 <form action="/update_item" method="post">
   <p>
-    Game: <br />
-    <input type="text" name="game_name" value="{{ item.game_name }}" maxlength="100" required />
+    <label for="game_name">Game</label>: <br />
+    <input type="text" name="game_name" id="game_name" value="{{ item.game_name }}" maxlength="100" required />
   </p>
   <p>
-    In-game username: <br />
-    <input type="text" name="game_username" value="{{ item.game_username }}" maxlength="50" required />
+    <label for="game_username">In-game username</label>: <br />
+    <input type="text" name="game_username" id="game_username" value="{{ item.game_username }}" maxlength="50" required />
   </p>
   <p>
-    Availability: <br />
-    <input type="time" id="availability_start" name="availability_start" value="{{ item.availability_start }}" required />
+    <label for="availability_start">Availability</label>: <br />
+    <input type="time" name="availability_start" id="availability_start" value="{{ item.availability_start }}" required />
     -
-    <input type="time" id="availability_end" name="availability_end" value="{{ item.availability_end }}" required/>
+    <input type="time" name="availability_end" value="{{ item.availability_end }}" required/>
   </p>
   {% for class, options in classes.items() %}
   <p>
-      <label>{{ class }}</label>: <br />
+      <label for="class{{ class }}">{{ class }}</label>: <br />
       {% for option in options %}
-      <input type="radio" name="{{ class }}" value="{{ option }}" {% if option == item[class] %}checked{% endif %} required /> {{ option }}<br />
+      <input type="radio" name="{{ class }}" id="class{{ class }}" value="{{ option }}" {% if option == item[class] %}checked{% endif %} required /> {{ option }}<br />
       {% endfor %}
   </p>
   {% endfor %}
   <p>
-    Other info: <br />
-    <textarea rows="8" cols="60" name="other_info" maxlength="1000">{{ item.other_info }}</textarea>
+    <label for="other_info">Other info</label>: <br />
+    <textarea rows="8" cols="60" name="other_info" id="other_info" maxlength="1000">{{ item.other_info }}</textarea>
   </p>
   <input type="hidden" name="item_id" value="{{ item.id }}"/>
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />

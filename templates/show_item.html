@@ -36,8 +36,8 @@ Username: {{ item.game_username }}<br />
 {% if session.user_id != item.user_id %}
 <h3>Sign up</h3>
 <form action="/sign_up" method="post">
-  Username:
-  <input type="text" name="game_username" size="15" required />
+  <label for="game_username">Username</label>:
+  <input type="text" name="game_username" id="game_username" size="15" required />
   <input type="hidden" name="item_id" value="{{ item.id }}" />
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Sign up to play" />

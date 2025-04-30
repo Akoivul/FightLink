@@ -7,30 +7,30 @@
 <div class="content">
 <form action="/create_item" method="post">
   <p>
-    Game: <br />
-    <input type="text" name="game_name" maxlength="50" required />
+    <label for="game_name">Game</label>: <br />
+    <input type="text" name="game_name" id="game_name" maxlength="50" required />
   </p>
   <p>
-    In-game username: <br />
-    <input type="text" name="game_username" maxlength="50" required />
+    <label for="game_username">In-game username</label>: <br />
+    <input type="text" name="game_username" id="game_username" maxlength="50" required />
   </p>
   <p>
-    Availability: <br />
-    <input type="time" id="availability_start" name="availability_start" required />
+    <label for="availability_start">Availability</label>: <br />
+    <input type="time" name="availability_start" id="availability_start"  required />
     -
-    <input type="time" id="availability_end" name="availability_end" required/>
+    <input type="time" name="availability_end" required/>
   </p>
   {% for class, options in classes.items() %}
   <p>
-    <label>{{ class }}</label>: <br />
+    <label for="class{{ class }}">{{ class }}</label>: <br />
     {% for option in options %}
-    <input type="radio" name="{{ class }}" value="{{ option }}" required /> {{ option }}<br />
+    <input type="radio" name="{{ class }}" id="class{{ class }}" value="{{ option }}" required /> {{ option }}<br />
     {% endfor %}
   </p>
   {% endfor %}
   <p>
-    Other info: <br />
-    <textarea rows="8" cols="60" name="other_info" maxlength="1000"></textarea>
+    <label for="other_info">Other info</label>: <br />
+    <textarea rows="8" cols="60" name="other_info" id="other_info" maxlength="1000"></textarea>
   </p>
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Create listing" />
