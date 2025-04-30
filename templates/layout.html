@@ -13,18 +13,18 @@
 
   {% if session.user_id %}
   <p>
-    Signed in as <a href="/user/{{ session.user_id }}" style="color: #467be3;">{{ session.username }}</a>
+    Signed in as <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
   </p>
   {% endif %}
   <p>
-    <a href="/" style="color: #467be3;">Home</a> |
-    <a href="/find_item" style="color: #467be3;">Search for listing</a> |
+    <a href="/">Home</a> |
+    <a href="/find_item">Search for listing</a> |
     {% if session.username %}
-      <a href="/new_item" style="color: #467be3;">New listing</a> |
-      <a href="/logout" style="color: #467be3;">Log out</a>
+      <a href="/new_item">New listing</a> |
+      <a href="/logout">Log out</a>
     {% else %}
-      <a href="/login" style="color: #467be3;">Log in</a> |
-      <a href="/register" style="color: #467be3;">Register</a>
+      <a href="/login">Log in</a> |
+      <a href="/register">Register</a>
     {% endif %}
   </p>
 
