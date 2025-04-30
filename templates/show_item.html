@@ -22,9 +22,8 @@ Username: {{ item.game_username }}<br />
   {{ class.title }}: {{ class.value }}<br />
   {% endfor %}
 {% endif %}
-<div style="white-space: pre-line;">
-  {{ item.other_info }}
-</div>
+<p>
+  {{ item.other_info | show_lines }}
 </p>
 </div>
 </div>
