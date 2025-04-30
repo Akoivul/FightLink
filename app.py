@@ -1,8 +1,10 @@
 import secrets
 import sqlite3
+
 from flask import Flask
 from flask import abort, flash, redirect, render_template, request, session
 import markupsafe
+
 import config
 import items
 import users
@@ -36,8 +38,8 @@ def show_user(user_id):
     user = users.get_user(user_id)
     if not user:
         abort(404)
-    items = users.get_items(user_id)
-    return render_template("show_user.html", user=user, items=items)
+    user_items = users.get_items(user_id)
+    return render_template("show_user.html", user=user, items=user_items)
 
 @app.route("/find_item")
 def find_item():
@@ -92,8 +94,9 @@ def create_item():
             if selected_option not in options:
                 abort(403)
             classes.append((class_name, selected_option))
-    
-    items.add_item(game_name, game_username, availability_time, availability_start, availability_end, other_info, user_id, classes)
+
+    items.add_item(game_name, game_username, availability_time,
+                   availability_start, availability_end, other_info, user_id, classes)
 
     return redirect("/")
 
@@ -110,11 +113,11 @@ def create_signup():
     if not item:
         abort(403)
     user_id = session["user_id"]
-    
+
     current_signups = items.get_signups(item_id)
     if any(signup["user_id"] == user_id for signup in current_signups):
         items.remove_signup(item_id, user_id)
-    
+
     items.add_signup(item_id, user_id, signup)
 
     return redirect("/item/" + str(item_id))
@@ -127,9 +130,9 @@ def edit_item(item_id):
         abort(404)
     if item["user_id"] != session["user_id"]:
         abort(403)
-    
+
     item = dict(item)
-    
+
     all_classes = items.get_all_classes()
 
     classes = {}
@@ -139,7 +142,7 @@ def edit_item(item_id):
     item_classes = items.get_classes(item_id)
     for entry in item_classes:
         item[entry["title"]] = entry["value"]
-    
+
     return render_template("edit_item.html", item=item, classes=classes, all_classes=all_classes)
 
 @app.route("/update_item", methods=["POST"])
@@ -177,7 +180,8 @@ def update_item():
                 abort(403)
             classes.append((class_name, selected_option))
 
-    items.update_item(item_id, game_name, game_username, availability_time, availability_start, availability_end, other_info, classes)
+    items.update_item(item_id, game_name, game_username,
+                      availability_time, availability_start, availability_end, other_info, classes)
 
     return redirect("/item/" + str(item_id))
 
@@ -195,8 +199,8 @@ def remove_item(item_id):
         return render_template("remove_item.html", item=item)
 
     if request.method == "POST":
+        check_csrf()
         if "remove" in request.form:
-            check_csrf()
             items.remove_item(item_id)
             return redirect("/")
         else:
@@ -248,4 +252,3 @@ def logout():
         del session["user_id"]
         del session["username"]
     return redirect("/")
-
