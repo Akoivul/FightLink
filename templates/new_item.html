@@ -24,7 +24,7 @@
   <p>
     <label for="class{{ class }}">{{ class }}</label>: <br />
     {% for option in options %}
-    <input type="radio" name="{{ class }}" id="class{{ class }}" value="{{ option }}" required /> {{ option }}<br />
+    <input type="radio" name="{{ class }}" id="class{{ class }}" value="{{ option }}" /> {{ option }}<br />
     {% endfor %}
   </p>
   {% endfor %}

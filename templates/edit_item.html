@@ -25,7 +25,7 @@
   <p>
       <label for="class{{ class }}">{{ class }}</label>: <br />
       {% for option in options %}
-      <input type="radio" name="{{ class }}" id="class{{ class }}" value="{{ option }}" {% if option == item[class] %}checked{% endif %} required /> {{ option }}<br />
+      <input type="radio" name="{{ class }}" id="class{{ class }}" value="{{ option }}" {% if option == item[class] %}checked{% endif %} /> {{ option }}<br />
       {% endfor %}
   </p>
   {% endfor %}
